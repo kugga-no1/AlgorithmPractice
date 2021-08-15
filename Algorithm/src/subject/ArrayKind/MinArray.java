@@ -1,4 +1,4 @@
-package subject;
+package subject.ArrayKind;
 
 /**
  * @program: MinArray
