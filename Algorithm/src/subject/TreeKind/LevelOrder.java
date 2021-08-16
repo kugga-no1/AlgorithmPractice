@@ -121,7 +121,9 @@ public class LevelOrder {
                 if(node.left != null) queue.add(node.left);
                 if(node.right != null) queue.add(node.right);
             }
-            if(res.size() % 2 == 1) Collections.reverse(tmp);
+            if(res.size() % 2 == 1) {
+                Collections.reverse(tmp);
+            }
             res.add(tmp);
         }
         return res;
