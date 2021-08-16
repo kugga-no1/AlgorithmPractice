@@ -1,4 +1,4 @@
-package subject.SearchAndBacktrackingKind;
+package subject.TreeKind;
 
 import java.util.*;
 
