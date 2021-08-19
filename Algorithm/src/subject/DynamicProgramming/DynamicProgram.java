@@ -1,8 +1,6 @@
 package subject.DynamicProgramming;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @program: DynamicProgram
@@ -194,11 +192,69 @@ public class DynamicProgram {
         }
         return tmp;
     }
+/**
+ * @Description:剑指 Offer 48. 最长不含重复字符的子字符串
+  请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。
+示例 1:
+输入: "abcabcbb"
+输出: 3
+解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+ * @return:
+ */
+/**
+ * 非动态规划  set+队列
+ */
+    public static int lengthOfLongestSubstring(String s) {
+    if(s.length()==1||s.length()==0){
+        return s.length();
+    }
+    int maxSize=1;
+    Set<Character> set = new HashSet<>();
+    Queue<Character> queue=new LinkedList<>();
+    set.add(s.charAt(0));
+    queue.add(s.charAt(0));
+    for (int i=1;i<=s.length()-1;i++){
+        char c = s.charAt(i);
+        if(!set.contains(c)){
+            set.add(c);
+            queue.offer(c);
+            int size = set.size();
+            if(size>maxSize){
+                maxSize=size;
+            }
+        }
+        else if(set.contains(c)){
+            int size = set.size();
+            if(size>maxSize){
+                maxSize=size;
+            }
+            while (queue.peek()!=c){
+                set.remove(queue.poll());
+            }
+            queue.add(queue.poll());
+        }
+    }
+    return maxSize;
+    }
+/**
+ * 非动态规划 双指针+hashmap
+ */
+    public int lengthOfLongestSubstring2(String s) {
+        Map<Character, Integer> dic = new HashMap<>();
+        int i = -1, res = 0;
+        for(int j = 0; j < s.length(); j++) {
+            if(dic.containsKey(s.charAt(j)))
+                i = Math.max(i, dic.get(s.charAt(j))); // 更新左指针 i
+            dic.put(s.charAt(j), j); // 哈希表记录
+            res = Math.max(res, j - i); // 更新结果
+        }
+        return res;
+    }
 
 
     public static void main(String[] args) {
 //    int[][] grid=new int[][]{{1,3,1},{1,5,1},{4,2,1}};
 //        System.out.println(maxValue2(grid));
-        System.out.println(translateNum2(1222222));
+        System.out.println(lengthOfLongestSubstring("au"));
     }
 }
