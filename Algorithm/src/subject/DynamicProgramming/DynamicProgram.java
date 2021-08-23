@@ -208,6 +208,7 @@ public class DynamicProgram {
     if(s.length()==1||s.length()==0){
         return s.length();
     }
+    new HashMap<Integer,Integer>();
     int maxSize=1;
     Set<Character> set = new HashSet<>();
     Queue<Character> queue=new LinkedList<>();
