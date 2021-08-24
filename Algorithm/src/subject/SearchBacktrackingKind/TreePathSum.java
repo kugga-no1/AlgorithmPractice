@@ -4,6 +4,7 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import subject.SearchBacktrackingKind.TreeNode;
 
 /**
  * @program: TreePathSum
@@ -12,34 +13,20 @@ import java.util.List;
  * @create: 2021/08/24/9:07
  */
 
-
+/**
+ * @Description: 查找二叉中和为某一值的路径（根节点到叶子节点，不能中间一段）
+ * @思路:dfs
+ */
 public class TreePathSum {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
 
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
     static List<Integer> path=new LinkedList<>();
     static List<List<Integer>> res=new LinkedList<>();
     static  List<List<Integer>> pathSum(TreeNode root, int target) {
-        dfs(root,target);
+        dfspathsum(root,target);
         return res;
     }
 
-    static void dfs(TreeNode root,int target){
+    static void dfspathsum(TreeNode root,int target){
     if(root==null){
         return;
     }
@@ -48,8 +35,8 @@ public class TreePathSum {
     if(target==0&&root.left==null&&root.right==null){
         res.add(new LinkedList<>(path));
     }
-    dfs(root.left,target);
-    dfs(root.right,target);
+        dfspathsum(root.left,target);
+        dfspathsum(root.right,target);
     path.remove(path.size()-1);
     }
 
@@ -64,7 +51,7 @@ public class TreePathSum {
         treeNode.right=treeNode2;
         treeNode1.left=treeNode3;
         treeNode1.right=treeNode4;
-        dfs(treeNode,7);
+        dfspathsum(treeNode,7);
         System.out.println(path);
     }
 
